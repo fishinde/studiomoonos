@@ -18,13 +18,19 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
         <script>
-          window.OneSignalDeferred = window.OneSignalDeferred || [];
-          OneSignalDeferred.push(async function(OneSignal) {
-            await OneSignal.init({
-              appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8",
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            window.OneSignalDeferred.push(async function(OneSignal) {
+                await OneSignal.init({
+                     appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8",
+                    notifyButton: {
+                        enable: true
+                    },
+                    serviceWorkerParam: { scope: "/myPath/myCustomScope/" },
+                    serviceWorkerPath: "myPath/OneSignalSDKWorker.js",
+                });
             });
-          });
         </script>
+
 
     </head>
     <body id="page-top">
