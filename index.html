@@ -204,7 +204,7 @@
             </div>
         </section>
         <!-- Call to action section-->
-        <section class="cta">
+        <section class="bg-light">
             <div class="cta-content">
                 <div class="container px-5">
                     <h2 class="text-white display-1 lh-1 mb-4">
@@ -214,6 +214,35 @@
                     </h2>
                     <a class="btn btn-outline-light py-3 px-4 rounded-pill" href="#!" target="_blank">Download for free</a>
                 </div>
+                   <div class="form-container">
+        <div class="form-column">
+            <form>
+                <label for="input1">Input 1</label>
+                <input type="text" id="input1" name="input1">
+                <label for="input2">Input 2</label>
+                <input type="text" id="input2" name="input2">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="form-column">
+            <form>
+                <label for="input3">Input 1</label>
+                <input type="text" id="input3" name="input3">
+                <label for="input4">Input 2</label>
+                <input type="text" id="input4" name="input4">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="form-column">
+            <form>
+                <label for="input5">Input 1</label>
+                <input type="text" id="input5" name="input5">
+                <label for="input6">Input 2</label>
+                <input type="text" id="input6" name="input6">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
             </div>
         </section>
         <!-- App badge section-->
@@ -277,11 +306,12 @@
                                 <label for="phone">Phone number</label>
                                 <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
                             </div>
-                            <!-- Message input-->
-                            <div class="form-floating mb-3">
-                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                                <label for="message">Country</label>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A country is required.</div>
+                            <!-- TAG input-->
+                           
+                             <div class="form-floating mb-3">
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <label for="name">Category</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A category is required.</div>
                             </div>
                             <!-- Submit success message-->
                             <!---->
