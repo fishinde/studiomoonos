@@ -54,6 +54,9 @@ window.addEventListener("load", () => {
         console.log(phone, "Registered Phone");
       }
 
+      // send outcome User registered
+      OneSignal.session.sendOutcome("user_registered")
+
       const form = document.getElementById("registerForm")
       form.reset()
       const registerModal = document.getElementById("registerModal");
@@ -74,6 +77,9 @@ window.addEventListener("load", () => {
         OneSignal.login(email); // login with email as external_id
         console.log(OneSignal.User.externalId, "Logged In User EXTERNAL_ID");
       }
+
+      // send outcome User Logged in
+      OneSignal.session.sendOutcome("user_logged_in")
 
       const form = document.getElementById("loginForm")
       form.reset()
@@ -102,6 +108,9 @@ window.addEventListener("load", () => {
         console.log(tagKey, "Tag Key");
         console.log(tagValue, "Tag Value");
       }
+
+      // send outcome User Added Tag
+      OneSignal.session.sendOutcome("user_added_tag")
 
       const form = document.getElementById("tagForm")
       form.reset()
