@@ -34,14 +34,17 @@ window.addEventListener("load", () => {
         if (email != "undefined" || email != null) {
           OneSignal.login(email); // set email as external_id
           OneSignal.User.addEmail(email);
+          console.log(name, "Registered Email");
         }
 
         if (name != "undefined" || name != null) {
           OneSignal.User.addAlias("name", name);
+          console.log(name, "Registered Name");
         }
 
         if (phone != "undefined" || phone != null) {
           OneSignal.User.addSMS(`+${phone}`);
+          console.log(name, "Registered Phone");
         }
       });
     }
@@ -80,6 +83,8 @@ window.addEventListener("load", () => {
               document.getElementById("tagKey").value,
               document.getElementById("tagValue").value
             );
+            console.log(tagKey, "Tag Key");
+            console.log(tagValue, "Tag Value");
           }
         });
       });
