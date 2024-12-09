@@ -10,7 +10,7 @@
       OneSignal.init({
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
         allowLocalhostAsSecureOrigin: true,
-        appId: "47d7eb53-9784-4f77-a2a6-e171696e580b", //main
+        appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
         serviceWorkerParam: { scope: "/js/" },
         serviceWorkerPath: "OneSignalSDKWorker.js",
       });
