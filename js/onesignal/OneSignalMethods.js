@@ -55,7 +55,7 @@ window.addEventListener("load", () => {
       }
 
       // send outcome User registered
-      OneSignal.session.sendOutcome("user_registered")
+      OneSignal.Session.sendOutcome("user_registered")
 
       const form = document.getElementById("registerForm")
       form.reset()
@@ -66,6 +66,7 @@ window.addEventListener("load", () => {
   } else {
     console.warn("Register button not found.");
   }
+
   // Login
   const loginSubmitBtn = document.getElementById("loginSubmitBtn");
   if (loginSubmitBtn) {
@@ -79,17 +80,28 @@ window.addEventListener("load", () => {
       }
 
       // send outcome User Logged in
-      OneSignal.session.sendOutcome("user_logged_in")
+      OneSignal.Session.sendOutcome("user_logged_in")
 
       const form = document.getElementById("loginForm")
       form.reset()
       const registerModal = document.getElementById("loginModal");
       const modal = bootstrap.Modal.getInstance(registerModal);
       modal.hide();
+      document.querySelector('#loginBtn').classList.add(".d-none");
+      document.querySelector('#logoutBtn').classList.remove(".d-none");
     });
   } else {
     console.warn("Login button not found.");
   }
+
+  // Logout
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    OneSignal.logout()
+    document.querySelector('#logoutBtn').classList.add(".d-none");
+    document.querySelector('#loginBtn').classList.remove(".d-none");
+  }
+
   // Add Tag
   const addTagWithFieldsButton = document.getElementById(
     "addTagWithFieldsButton"
@@ -110,7 +122,7 @@ window.addEventListener("load", () => {
       }
 
       // send outcome User Added Tag
-      OneSignal.session.sendOutcome("user_added_tag")
+      OneSignal.Session.sendOutcome("user_added_tag")
 
       const form = document.getElementById("tagForm")
       form.reset()

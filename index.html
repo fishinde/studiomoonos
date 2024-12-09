@@ -74,13 +74,23 @@
             </span>
           </button>
           <button
-            class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0"
+            class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0 mx-1"
+            id="loginBtn"
             data-bs-toggle="modal"
             data-bs-target="#loginModal"
           >
             <span class="d-flex align-items-center">
               <i class="bi-chat-text-fill me-2"></i>
               <span class="small">Login</span>
+            </span>
+          </button>
+          <button
+            class="btn btn-danger rounded-pill px-3 mb-2 mb-lg-0 mx-1 d-none"
+            id="logoutBtn"
+          >
+            <span class="d-flex align-items-center">
+              <i class="bi-chat-text-fill me-2"></i>
+              <span class="small">Logout</span>
             </span>
           </button>
         </div>
@@ -396,7 +406,9 @@
                         <input type="text" id="tagKey" />
                         <label for="input2">Input Value</label>
                         <input type="text" id="tagValue" />
-                        <button id="addTagWithFieldsButton" type="submit">Submit</button>
+                        <button id="addTagWithFieldsButton" type="submit">
+                          Submit
+                        </button>
                       </form>
                     </div>
                   </div>
