@@ -21,73 +21,81 @@
 })(document);
 
 window.addEventListener("load", () => {
-  OneSignalDeferred.push(function () {
-    // Register
-    const registerSubmitBtn = document.getElementById("registerSubmitBtn");
-    if (typeof registerSubmitBtn != "undefined" && registerSubmitBtn != null) {
-      registerSubmitBtn.addEventListener("click", () => {
-        const name = document.getElementById("registerName").value;
-        const email = document.getElementById("registerEmail").value;
-        const phone = document.getElementById("registerPhone").value;
-        const category = document.getElementById("registerCategory").value;
+  console.log("Window loaded, initializing OneSignal");
 
-        if (typeof email != "undefined" || email != null) {
-          OneSignal.login(email); // set email as external_id
-          OneSignal.User.addEmail(email);
-          console.log(name, "Registered Email");
-        }
+  if (!window.OneSignal) {
+    console.error("OneSignal SDK not loaded!");
+    return;
+  }
 
-        if (typeof name != "undefined" || name != null) {
-          OneSignal.User.addAlias("name", name);
-          console.log(name, "Registered Name");
-        }
+  // Register
+  const registerSubmitBtn = document.getElementById("registerSubmitBtn");
+  if (registerSubmitBtn) {
+    registerSubmitBtn.addEventListener("click", () => {
+      const name = document.getElementById("registerName").value;
+      const email = document.getElementById("registerEmail").value;
+      const phone = document.getElementById("registerPhone").value;
+      const category = document.getElementById("registerCategory").value;
 
-        if (typeof phone != "undefined" || phone != null) {
-          OneSignal.User.addSMS(`+${phone}`);
-          console.log(name, "Registered Phone");
+      if (typeof email != "undefined" || email != null) {
+        OneSignal.login(email); // set email as external_id
+        OneSignal.User.addEmail(email);
+        console.log(email, "Registered Email");
+      }
+
+      if (typeof name != "undefined" || name != null) {
+        OneSignal.User.addAlias("name", name);
+        console.log(name, "Registered Name");
+      }
+
+      if (typeof phone != "undefined" || phone != null) {
+        OneSignal.User.addSMS(`+${phone}`);
+        console.log(phone, "Registered Phone");
+      }
+    });
+  } else {
+    console.warn("Register button not found.");
+  }
+  // Login
+  const loginSubmitBtn = document.getElementById("loginSubmitBtn");
+  if (loginSubmitBtn) {
+    loginSubmitBtn.addEventListener("click", () => {
+      const email = document.getElementById("loginEmail").value;
+
+      if (typeof email != "undefined" || email != null) {
+        OneSignal.login(email); // login with email as external_id
+        console.log(OneSignal.User.externalId, "Logged In User EXTERNAL_ID");
+      }
+    });
+  } else {
+    console.warn("Login button not found.");
+  }
+  // Add Tag
+  const addTagWithFieldsButton = document.getElementById(
+    "addTagWithFieldsButton"
+  );
+  if (addTagWithFieldsButton) {
+    addTagWithFieldsButton.addEventListener("click", () => {
+      OneSignalDeferred.push(function () {
+        const tagKey = document.getElementById("tagKey").value;
+        const tagValue = document.getElementById("tagValue").value;
+
+        if (
+          typeof tagKey != "undefined" ||
+          tagKey != null ||
+          typeof tagValue != "undefined" ||
+          tagValue != null
+        ) {
+          OneSignal.User.addTag(
+            document.getElementById("tagKey").value,
+            document.getElementById("tagValue").value
+          );
+          console.log(tagKey, "Tag Key");
+          console.log(tagValue, "Tag Value");
         }
       });
-    }
-    // Login
-    const loginSubmitBtn = document.getElementById("loginSubmitBtn");
-    if (typeof loginSubmitBtn != "undefined" && loginSubmitBtn != null) {
-      loginSubmitBtn.addEventListener("click", () => {
-        const email = document.getElementById("loginEmail").value;
-
-        if (typeof email != "undefined" || email != null) {
-          OneSignal.login(email); // login with email as external_id
-          console.log(OneSignal.User.externalId, "Logged In User EXTERNAL_ID");
-        }
-      });
-    }
-    // Add Tag
-    const addTagWithFieldsButton = document.getElementById(
-      "addTagWithFieldsButton"
-    );
-    if (
-      typeof addTagWithFieldsButton != "undefined" &&
-      addTagWithFieldsButton != null
-    ) {
-      addTagWithFieldsButton.addEventListener("click", () => {
-        OneSignalDeferred.push(function () {
-          const tagKey = document.getElementById("tagKey").value;
-          const tagValue = document.getElementById("tagValue").value;
-
-          if (
-            typeof tagKey != "undefined" ||
-            tagKey != null ||
-            typeof tagValue != "undefined" ||
-            tagValue != null
-          ) {
-            OneSignal.User.addTag(
-              document.getElementById("tagKey").value,
-              document.getElementById("tagValue").value
-            );
-            console.log(tagKey, "Tag Key");
-            console.log(tagValue, "Tag Value");
-          }
-        });
-      });
-    }
-  });
+    });
+  } else {
+    console.warn("Add Tag Submit button not found.");
+  }
 });
