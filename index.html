@@ -391,11 +391,13 @@
                     ></i>
                     <h3 class="font-alt">Data Tag</h3>
                     <div class="form-column">
-                      <label for="input1">Input Key</label>
-                      <input type="text" id="tagKey" />
-                      <label for="input2">Input Value</label>
-                      <input type="text" id="tagValue" />
-                      <button id="addTagWithFieldsButton">Submit</button>
+                      <form id="tagForm">
+                        <label for="input1">Input Key</label>
+                        <input type="text" id="tagKey" />
+                        <label for="input2">Input Value</label>
+                        <input type="text" id="tagValue" />
+                        <button id="addTagWithFieldsButton" type="submit">Submit</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -407,11 +409,13 @@
                     ></i>
                     <h3 class="font-alt">Update Name</h3>
                     <div class="form-column">
-                      <label for="input1">Input $first_name</label>
-                      <input type="text" id="input1" name="input1" />
-                      <label for="input2">Input $last_name</label>
-                      <input type="text" id="input2" name="input2" />
-                      <button>Submit</button>
+                      <form>
+                        <label for="input1">Input $first_name</label>
+                        <input type="text" id="input1" name="input1" />
+                        <label for="input2">Input $last_name</label>
+                        <input type="text" id="input2" name="input2" />
+                        <button type="submit">Submit</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -542,99 +546,102 @@
             <!-- To make this form functional, sign up at-->
             <!-- https://startbootstrap.com/solution/contact-forms-->
             <!-- to get an API token!-->
-            <!-- Name input-->
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                id="registerName"
-                type="text"
-                placeholder="Enter your name..."
-                data-sb-validations="required"
-              />
-              <label for="name">Full name</label>
-              <div class="invalid-feedback" data-sb-feedback="name:required">
-                A name is required.
+            <form id="registerForm" data-sb-form-api-token="API_TOKEN">
+              <!-- Name input-->
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="registerName"
+                  type="text"
+                  placeholder="Enter your name..."
+                  data-sb-validations="required"
+                />
+                <label for="name">Full name</label>
+                <div class="invalid-feedback" data-sb-feedback="name:required">
+                  A name is required.
+                </div>
               </div>
-            </div>
-            <!-- Email address input-->
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                id="registerEmail"
-                type="email"
-                placeholder="name@example.com"
-                data-sb-validations="required,email"
-              />
-              <label for="email">Email address</label>
-              <div class="invalid-feedback" data-sb-feedback="email:required">
-                An email is required.
+              <!-- Email address input-->
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="registerEmail"
+                  type="email"
+                  placeholder="name@example.com"
+                  data-sb-validations="required,email"
+                />
+                <label for="email">Email address</label>
+                <div class="invalid-feedback" data-sb-feedback="email:required">
+                  An email is required.
+                </div>
+                <div class="invalid-feedback" data-sb-feedback="email:email">
+                  Email is not valid.
+                </div>
               </div>
-              <div class="invalid-feedback" data-sb-feedback="email:email">
-                Email is not valid.
+              <!-- Phone number input-->
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="registerPhone"
+                  type="tel"
+                  placeholder="(123) 456-7890"
+                  data-sb-validations="required"
+                />
+                <label for="phone">Phone number</label>
+                <div class="invalid-feedback" data-sb-feedback="phone:required">
+                  A phone number is required.
+                </div>
               </div>
-            </div>
-            <!-- Phone number input-->
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                id="registerPhone"
-                type="tel"
-                placeholder="(123) 456-7890"
-                data-sb-validations="required"
-              />
-              <label for="phone">Phone number</label>
-              <div class="invalid-feedback" data-sb-feedback="phone:required">
-                A phone number is required.
-              </div>
-            </div>
-            <!-- TAG input-->
+              <!-- TAG input-->
 
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                id="registerCategory"
-                type="text"
-                placeholder="Enter your name..."
-                data-sb-validations="required"
-              />
-              <label for="name">Category</label>
-              <div class="invalid-feedback" data-sb-feedback="name:required">
-                A category is required.
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="registerCategory"
+                  type="text"
+                  placeholder="Enter your name..."
+                  data-sb-validations="required"
+                />
+                <label for="name">Category</label>
+                <div class="invalid-feedback" data-sb-feedback="name:required">
+                  A category is required.
+                </div>
+                `
               </div>
-              `
-            </div>
-            <!-- Submit success message-->
-            <!---->
-            <!-- This is what your users will see when the form-->
-            <!-- has successfully submitted-->
-            <div class="d-none" id="submitSuccessMessage">
-              <div class="text-center mb-3">
-                <div class="fw-bolder">Form submission successful!</div>
-                To activate this form, sign up at
-                <br />
-                <a href="https://startbootstrap.com/solution/contact-forms"
-                  >https://startbootstrap.com/solution/contact-forms</a
+              <!-- Submit success message-->
+              <!---->
+              <!-- This is what your users will see when the form-->
+              <!-- has successfully submitted-->
+              <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center mb-3">
+                  <div class="fw-bolder">Form submission successful!</div>
+                  To activate this form, sign up at
+                  <br />
+                  <a href="https://startbootstrap.com/solution/contact-forms"
+                    >https://startbootstrap.com/solution/contact-forms</a
+                  >
+                </div>
+              </div>
+              <!-- Submit error message-->
+              <!---->
+              <!-- This is what your users will see when there is-->
+              <!-- an error submitting the form-->
+              <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">
+                  Error sending message!
+                </div>
+              </div>
+              <!-- Submit Button-->
+              <div class="d-grid">
+                <button
+                  class="btn btn-primary rounded-pill btn-lg"
+                  id="registerSubmitBtn"
+                  type="submit"
                 >
+                  Submit
+                </button>
               </div>
-            </div>
-            <!-- Submit error message-->
-            <!---->
-            <!-- This is what your users will see when there is-->
-            <!-- an error submitting the form-->
-            <div class="d-none" id="submitErrorMessage">
-              <div class="text-center text-danger mb-3">
-                Error sending message!
-              </div>
-            </div>
-            <!-- Submit Button-->
-            <div class="d-grid">
-              <button
-                class="btn btn-primary rounded-pill btn-lg"
-                id="registerSubmitBtn"
-              >
-                Submit
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -668,33 +675,36 @@
             <!-- To make this form functional, sign up at-->
             <!-- https://startbootstrap.com/solution/contact-forms-->
             <!-- to get an API token!-->
-            <!-- Name input-->
-            <div class="form-floating mb-3">
-              <input
-                class="form-control"
-                id="loginEmail"
-                type="email"
-                placeholder="Enter your email..."
-                data-sb-validations="required"
-              />
-              <label for="loginEmail">Email</label>
-              <div class="invalid-feedback" data-sb-feedback="email:required">
-                An email is required.
+            <form id="loginForm" data-sb-form-api-token="API_TOKEN">
+              <!-- Name input-->
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  id="loginEmail"
+                  type="email"
+                  placeholder="Enter your email..."
+                  data-sb-validations="required"
+                />
+                <label for="loginEmail">Email</label>
+                <div class="invalid-feedback" data-sb-feedback="email:required">
+                  An email is required.
+                </div>
+                <div class="invalid-feedback" data-sb-feedback="email:email">
+                  Email is not valid.
+                </div>
               </div>
-              <div class="invalid-feedback" data-sb-feedback="email:email">
-                Email is not valid.
-              </div>
-            </div>
 
-            <!-- Submit Button-->
-            <div class="d-grid">
-              <button
-                class="btn btn-primary rounded-pill btn-lg"
-                id="loginSubmitBtn"
-              >
-                Login
-              </button>
-            </div>
+              <!-- Submit Button-->
+              <div class="d-grid">
+                <button
+                  class="btn btn-primary rounded-pill btn-lg"
+                  id="loginSubmitBtn"
+                  type="submit"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

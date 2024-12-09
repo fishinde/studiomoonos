@@ -31,11 +31,12 @@ window.addEventListener("load", () => {
   // Register
   const registerSubmitBtn = document.getElementById("registerSubmitBtn");
   if (registerSubmitBtn) {
-    registerSubmitBtn.addEventListener("click", () => {
-      const name = document.getElementById("registerName").value;
-      const email = document.getElementById("registerEmail").value;
-      const phone = document.getElementById("registerPhone").value;
-      const category = document.getElementById("registerCategory").value;
+    registerSubmitBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      let name = document.getElementById("registerName").value;
+      let email = document.getElementById("registerEmail").value;
+      let phone = document.getElementById("registerPhone").value;
+      let category = document.getElementById("registerCategory").value;
 
       if (email) {
         OneSignal.login(email); // set email as external_id
@@ -52,6 +53,12 @@ window.addEventListener("load", () => {
         OneSignal.User.addSms(`+${phone}`);
         console.log(phone, "Registered Phone");
       }
+
+      const form = document.getElementById("registerForm")
+      form.reset()
+      const registerModal = document.getElementById("feedbackModal");
+      const modal = bootstrap.Modal.getInstance(registerModal);
+      modal.hide();
     });
   } else {
     console.warn("Register button not found.");
@@ -59,13 +66,20 @@ window.addEventListener("load", () => {
   // Login
   const loginSubmitBtn = document.getElementById("loginSubmitBtn");
   if (loginSubmitBtn) {
-    loginSubmitBtn.addEventListener("click", () => {
-      const email = document.getElementById("loginEmail").value;
+    loginSubmitBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      let email = document.getElementById("loginEmail").value;
 
       if (email) {
         OneSignal.login(email); // login with email as external_id
         console.log(OneSignal.User.externalId, "Logged In User EXTERNAL_ID");
       }
+
+      const form = document.getElementById("loginForm")
+      form.reset()
+      const registerModal = document.getElementById("feedbackModal");
+      const modal = bootstrap.Modal.getInstance(registerModal);
+      modal.hide();
     });
   } else {
     console.warn("Login button not found.");
@@ -75,20 +89,22 @@ window.addEventListener("load", () => {
     "addTagWithFieldsButton"
   );
   if (addTagWithFieldsButton) {
-    addTagWithFieldsButton.addEventListener("click", () => {
-      OneSignalDeferred.push(function () {
-        const tagKey = document.getElementById("tagKey").value;
-        const tagValue = document.getElementById("tagValue").value;
+    addTagWithFieldsButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      let tagKey = document.getElementById("tagKey").value;
+      let tagValue = document.getElementById("tagValue").value;
 
-        if (tagKey || tagValue) {
-          OneSignal.User.addTag(
-            document.getElementById("tagKey").value,
-            document.getElementById("tagValue").value
-          );
-          console.log(tagKey, "Tag Key");
-          console.log(tagValue, "Tag Value");
-        }
-      });
+      if (tagKey || tagValue) {
+        OneSignal.User.addTag(
+          document.getElementById("tagKey").value,
+          document.getElementById("tagValue").value
+        );
+        console.log(tagKey, "Tag Key");
+        console.log(tagValue, "Tag Value");
+      }
+
+      const form = document.getElementById("tagForm")
+      form.reset()
     });
   } else {
     console.warn("Add Tag Submit button not found.");
