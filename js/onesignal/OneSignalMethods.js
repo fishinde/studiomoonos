@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
 
       const form = document.getElementById("registerForm")
       form.reset()
-      const registerModal = document.getElementById("feedbackModal");
+      const registerModal = document.getElementById("registerModal");
       const modal = bootstrap.Modal.getInstance(registerModal);
       modal.hide();
     });
@@ -77,7 +77,7 @@ window.addEventListener("load", () => {
 
       const form = document.getElementById("loginForm")
       form.reset()
-      const registerModal = document.getElementById("feedbackModal");
+      const registerModal = document.getElementById("loginModal");
       const modal = bootstrap.Modal.getInstance(registerModal);
       modal.hide();
     });
