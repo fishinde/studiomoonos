@@ -49,7 +49,7 @@ window.addEventListener("load", () => {
       }
 
       if (phone) {
-        OneSignal.User.addSMS(`+${phone}`);
+        OneSignal.User.addSms(`+${phone}`);
         console.log(phone, "Registered Phone");
       }
     });
