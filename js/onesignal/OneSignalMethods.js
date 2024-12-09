@@ -37,18 +37,18 @@ window.addEventListener("load", () => {
       const phone = document.getElementById("registerPhone").value;
       const category = document.getElementById("registerCategory").value;
 
-      if (typeof email != "undefined" || email != null) {
+      if (email) {
         OneSignal.login(email); // set email as external_id
         OneSignal.User.addEmail(email);
         console.log(email, "Registered Email");
       }
 
-      if (typeof name != "undefined" || name != null) {
+      if (name) {
         OneSignal.User.addAlias("name", name);
         console.log(name, "Registered Name");
       }
 
-      if (typeof phone != "undefined" || phone != null) {
+      if (phone) {
         OneSignal.User.addSMS(`+${phone}`);
         console.log(phone, "Registered Phone");
       }
@@ -62,7 +62,7 @@ window.addEventListener("load", () => {
     loginSubmitBtn.addEventListener("click", () => {
       const email = document.getElementById("loginEmail").value;
 
-      if (typeof email != "undefined" || email != null) {
+      if (email) {
         OneSignal.login(email); // login with email as external_id
         console.log(OneSignal.User.externalId, "Logged In User EXTERNAL_ID");
       }
@@ -80,12 +80,7 @@ window.addEventListener("load", () => {
         const tagKey = document.getElementById("tagKey").value;
         const tagValue = document.getElementById("tagValue").value;
 
-        if (
-          typeof tagKey != "undefined" ||
-          tagKey != null ||
-          typeof tagValue != "undefined" ||
-          tagValue != null
-        ) {
+        if (tagKey || tagValue) {
           OneSignal.User.addTag(
             document.getElementById("tagKey").value,
             document.getElementById("tagValue").value
