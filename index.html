@@ -54,6 +54,12 @@
                             <span class="small">Free Account</span>
                         </span>
                     </button>
+                    <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#login">
+                        <span class="d-flex align-items-center">
+                            <i class="bi-chat-text-fill me-2"></i>
+                            <span class="small">Login</span>
+                        </span>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -216,15 +222,15 @@
                                     <div class="text-center">
                                         <i class="bi-phone icon-feature text-gradient d-block mb-3"></i>
                                         <h3 class="font-alt">Data Tag</h3>
-                            <div class="form-column">
-                                <form>
-                                    <label for="input1">Input Key</label>
-                                    <input type="text" id="input1" name="input1">
-                                    <label for="input2">Input Value</label>
-                                    <input type="text" id="input2" name="input2">
-                                    <button type="submit">Submit</button>
-                                </form>
-                            </div>
+                                        <div class="form-column">
+                                            <form>
+                                                <label for="input1">Input Key</label>
+                                                <input type="text" id="input1" name="input1">
+                                                <label for="input2">Input Value</label>
+                                                <input type="text" id="input2" name="input2">
+                                                <button type="submit">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-5">
@@ -232,17 +238,18 @@
                                     <div class="text-center">
                                         <i class="bi-camera icon-feature text-gradient d-block mb-3"></i>
                                         <h3 class="font-alt">Update Name</h3>
-                            <div class="form-column">
-                                <form>
-                                    <label for="input1">Input $first_name</label>
-                                    <input type="text" id="input1" name="input1">
-                                    <label for="input2">Input $last_name</label>
-                                    <input type="text" id="input2" name="input2">
-                                    <button type="submit">Submit</button>
-                                </form>
-                            </div>
+                                        <div class="form-column">
+                                            <form>
+                                                <label for="input1">Input $first_name</label>
+                                                <input type="text" id="input1" name="input1">
+                                                <label for="input2">Input $last_name</label>
+                                                <input type="text" id="input2" name="input2">
+                                                <button type="submit">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                
                         </div>
@@ -359,6 +366,61 @@
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             <!-- Submit Button-->
                             <div class="d-grid"><button class="btn btn-primary rounded-pill btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- login Modal-->
+        <div class="modal fade" id="login" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-gradient-primary-to-secondary p-4">
+                        <h5 class="modal-title font-alt text-white" id="feedbackModalLabel">
+                           Login
+                        </h5>
+                        <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body border-0 p-4">
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <label for="name">ID</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">ID = fish@tank.com</div>
+                            </div>
+                           
+                            <!-- Phone number input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                                <label for="phone">Password</label>
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">PWD = qwe123</div>
+                            </div>
+                           
+                            <!-- Submit success message-->
+                            <!---->
+                            <!-- This is what your users will see when the form-->
+                            <!-- has successfully submitted-->
+                            <div class="d-none" id="submitSuccessMessage">
+                                <div class="text-center mb-3">
+                                    <div class="fw-bolder">Login successful! External ID = 168889</div>
+                                    
+                                </div>
+                            </div>
+                            <!-- Submit error message-->
+                            <!---->
+                            <!-- This is what your users will see when there is-->
+                            <!-- an error submitting the form-->
+                            
+                            <!-- Submit Button-->
+                            <div class="d-grid"><button class="btn btn-primary rounded-pill btn-lg disabled" id="submitButton" type="submit">Login</button></div>
                         </form>
                     </div>
                 </div>
