@@ -55,10 +55,10 @@ window.addEventListener("load", () => {
       }
 
       // send outcome User registered
-      OneSignal.Session.sendOutcome("user_registered")
+      OneSignal.Session.sendOutcome("user_registered");
 
-      const form = document.getElementById("registerForm")
-      form.reset()
+      const form = document.getElementById("registerForm");
+      form.reset();
       const registerModal = document.getElementById("registerModal");
       const modal = bootstrap.Modal.getInstance(registerModal);
       modal.hide();
@@ -80,15 +80,15 @@ window.addEventListener("load", () => {
       }
 
       // send outcome User Logged in
-      OneSignal.Session.sendOutcome("user_logged_in")
+      OneSignal.Session.sendOutcome("user_logged_in");
 
-      const form = document.getElementById("loginForm")
-      form.reset()
+      const form = document.getElementById("loginForm");
+      form.reset();
       const registerModal = document.getElementById("loginModal");
       const modal = bootstrap.Modal.getInstance(registerModal);
       modal.hide();
-      document.querySelector('#loginBtn').classList.add(".d-none");
-      document.querySelector('#logoutBtn').classList.remove(".d-none");
+      document.querySelector("#loginBtn").classList.add("d-none");
+      document.querySelector("#logoutBtn").classList.remove("d-none");
     });
   } else {
     console.warn("Login button not found.");
@@ -97,9 +97,15 @@ window.addEventListener("load", () => {
   // Logout
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
-    OneSignal.logout()
-    document.querySelector('#logoutBtn').classList.add(".d-none");
-    document.querySelector('#loginBtn').classList.remove(".d-none");
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      OneSignal.logout();
+      console.log("User signed out.");
+      document.querySelector("#logoutBtn").classList.add("d-none");
+      document.querySelector("#loginBtn").classList.remove("d-none");
+    });
+  } else {
+    console.warn("Logout button not found.");
   }
 
   // Add Tag
@@ -122,10 +128,10 @@ window.addEventListener("load", () => {
       }
 
       // send outcome User Added Tag
-      OneSignal.Session.sendOutcome("user_added_tag")
+      OneSignal.Session.sendOutcome("user_added_tag");
 
-      const form = document.getElementById("tagForm")
-      form.reset()
+      const form = document.getElementById("tagForm");
+      form.reset();
     });
   } else {
     console.warn("Add Tag Submit button not found.");
