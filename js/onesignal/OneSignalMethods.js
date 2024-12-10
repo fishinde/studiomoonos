@@ -81,13 +81,13 @@ window.addEventListener("load", () => {
     loginSubmitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let email = document.getElementById("loginEmail").value;
-      if (email) {
-        const loginEmail = email.trim();
+      const emailTrim = email.trim();
+      if (emailTrim) {
         OneSignalDeferred.push(async function (OneSignal) {
           // login with email as external_id
-          await OneSignal.login(loginEmail);
+          await OneSignal.login(emailTrim);
           await OneSignal.User.addEmail(emailTrim);
-          console.log("Logged In User Account", loginEmail);
+          console.log("Logged In User Account", emailTrim);
 
           // send outcome User Logged in
           await OneSignal.Session.sendOutcome("user_logged_in");
