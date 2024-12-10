@@ -42,9 +42,9 @@ window.addEventListener("load", () => {
 
       const emailTrim = email.trim();
       const nameTrim = name.trim();
-      const phoneTrim = phone.trim();
+      // const phoneTrim = phone.trim();
 
-      if (!emailTrim || !nameTrim || !phoneTrim) {
+      if (!emailTrim || !nameTrim) {
         alert("Please enter required fields");
         return;
       }
@@ -58,13 +58,11 @@ window.addEventListener("load", () => {
         await OneSignal.User.addAlias("name", nameTrim);
         console.log("Registered Name", nameTrim);
 
-        await OneSignal.User.addSms(`+${phoneTrim}`);
-        console.log("Registered Phone", phoneTrim);
+        // await OneSignal.User.addSms(`+${phoneTrim}`);
+        // console.log("Registered Phone", phoneTrim);
 
         // send outcome User registered
         await OneSignal.Session.sendOutcome("user_registered");
-
-        console.log("OneSignal.User.onesignalId", OneSignal.User.onesignalId);
 
         const form = document.getElementById("registerForm");
         form.reset();
@@ -97,8 +95,6 @@ window.addEventListener("load", () => {
           // send outcome User Logged in
           await OneSignal.Session.sendOutcome("user_logged_in");
 
-          console.log("OneSignal.User.onesignalId", OneSignal.User.onesignalId);
-
           const form = document.getElementById("loginForm");
           form.reset();
           const loginModal = document.getElementById("loginModal");
@@ -122,6 +118,7 @@ window.addEventListener("load", () => {
     logoutBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       OneSignalDeferred.push(async function (OneSignal) {
+        console.log("OneSignal.User.externalId", OneSignal.User.externalId);
         await OneSignal.logout();
         console.log("User signed out.");
         document.querySelector("#logoutBtn").classList.add("d-none");
@@ -145,6 +142,7 @@ window.addEventListener("load", () => {
 
       if (tagKey && tagValue) {
         OneSignalDeferred.push(async function (OneSignal) {
+          console.log("OneSignal.User.externalId", OneSignal.User.externalId);
           await OneSignal.User.addTag(tagKey, tagValue);
           console.log("Tag Key", tagKey);
           console.log("Tag Value", tagValue);
@@ -173,6 +171,7 @@ window.addEventListener("load", () => {
 
       if (firstName && lastName) {
         OneSignalDeferred.push(async function (OneSignal) {
+          console.log("OneSignal.User.externalId", OneSignal.User.externalId);
           await OneSignal.User.addAliases({
             firstName: firstName,
             lastName: lastName,
@@ -203,6 +202,7 @@ window.addEventListener("load", () => {
 
         // send outcome to count how many user click download
         OneSignalDeferred.push(async function (OneSignal) {
+          console.log("OneSignal.User.externalId", OneSignal.User.externalId);
           await OneSignal.Session.sendOutcome("user_download");
           console.log("download button clicked");
         });
