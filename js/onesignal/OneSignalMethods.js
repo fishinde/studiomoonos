@@ -48,25 +48,27 @@ window.addEventListener("load", () => {
       }
 
       OneSignalDeferred.push(async function (OneSignal) {
-        OneSignal.login(emailTrim); // initiate login first
+        await OneSignal.login(emailTrim); // initiate login first
 
-        OneSignal.User.addEmail(emailTrim);
+        await OneSignal.User.addEmail(emailTrim);
         console.log("Registered Email", emailTrim);
 
-        OneSignal.User.addAlias("name", nameTrim);
+        await OneSignal.User.addAlias("name", nameTrim);
         console.log("Registered Name", nameTrim);
 
-        OneSignal.User.addSms(`+${phoneTrim}`);
+        await OneSignal.User.addSms(`+${phoneTrim}`);
         console.log("Registered Phone", phoneTrim);
 
         // send outcome User registered
-        OneSignal.Session.sendOutcome("user_registered");
+        await OneSignal.Session.sendOutcome("user_registered");
 
         const form = document.getElementById("registerForm");
         form.reset();
         const registerModal = document.getElementById("registerModal");
         const modal = bootstrap.Modal.getInstance(registerModal);
         modal.hide();
+        document.querySelector("#loginBtn").classList.add("d-none");
+        document.querySelector("#logoutBtn").classList.remove("d-none");
       });
     });
   } else {
@@ -84,6 +86,7 @@ window.addEventListener("load", () => {
         OneSignalDeferred.push(async function (OneSignal) {
           // login with email as external_id
           await OneSignal.login(loginEmail);
+          await OneSignal.User.addEmail(emailTrim);
           console.log("Logged In User Account", loginEmail);
 
           // send outcome User Logged in
@@ -132,11 +135,11 @@ window.addEventListener("load", () => {
 
       if (tagKey && tagValue) {
         OneSignalDeferred.push(async function (OneSignal) {
-          OneSignal.User.addTag(tagKey, tagValue);
+          await OneSignal.User.addTag(tagKey, tagValue);
           console.log("Tag Key", tagKey);
           console.log("Tag Value", tagValue);
           // send outcome User Added Tag
-          OneSignal.Session.sendOutcome("user_added_tag");
+          await OneSignal.Session.sendOutcome("user_added_tag");
           const form = document.getElementById("tagForm");
           form.reset();
         });
@@ -160,7 +163,7 @@ window.addEventListener("load", () => {
 
       if (firstName && lastName) {
         OneSignalDeferred.push(async function (OneSignal) {
-          OneSignal.User.addAliases({
+          await OneSignal.User.addAliases({
             firstName: firstName,
             lastName: lastName,
           });
@@ -168,7 +171,7 @@ window.addEventListener("load", () => {
           console.log(lastName, "Last Name");
 
           // send outcome User Added FirstName/LastName Aliases
-          OneSignal.Session.sendOutcome("user_added_aliases");
+          await OneSignal.Session.sendOutcome("user_added_aliases");
 
           const form = document.getElementById("nameForm");
           form.reset();
@@ -189,7 +192,7 @@ window.addEventListener("load", () => {
 
       // send outcome to count how many user click download
       OneSignalDeferred.push(async function (OneSignal) {
-        OneSignal.Session.sendOutcome("user_download");
+        await OneSignal.Session.sendOutcome("user_download");
       });
     });
   } else {
