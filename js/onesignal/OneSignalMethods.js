@@ -5,13 +5,14 @@
   script.async = true;
   script.onload = function () {
     window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(function () {
+    OneSignalDeferred.push(async function (OneSignal) {
       //OneSignal.setConsentRequired(true);
-      OneSignal.init({
+      await OneSignal.init({
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
         allowLocalhostAsSecureOrigin: true,
         appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
         serviceWorkerParam: { scope: "/studiomoonos/" },
+        serviceWorkerPath: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
         path: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
         notifyButton: {
           enable: true,
