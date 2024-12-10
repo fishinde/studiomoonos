@@ -68,6 +68,7 @@ window.addEventListener("load", () => {
         const modal = bootstrap.Modal.getInstance(registerModal);
         modal.hide();
         document.querySelector("#loginBtn").classList.add("d-none");
+        document.querySelector("#registerBtn").classList.add("d-none");
         document.querySelector("#logoutBtn").classList.remove("d-none");
       });
     });
@@ -97,6 +98,7 @@ window.addEventListener("load", () => {
           const modal = bootstrap.Modal.getInstance(loginModal);
           modal.hide();
           document.querySelector("#loginBtn").classList.add("d-none");
+          document.querySelector("#registerBtn").classList.add("d-none");
           document.querySelector("#logoutBtn").classList.remove("d-none");
         });
       } else {
@@ -117,6 +119,7 @@ window.addEventListener("load", () => {
         console.log("User signed out.");
         document.querySelector("#logoutBtn").classList.add("d-none");
         document.querySelector("#loginBtn").classList.remove("d-none");
+        document.querySelector("#registerBtn").classList.remove("d-none");
       });
     });
   } else {
