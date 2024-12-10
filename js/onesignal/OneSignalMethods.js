@@ -12,7 +12,7 @@
         allowLocalhostAsSecureOrigin: true,
         appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
         serviceWorkerParam: { scope: "/studiomoonos/" },
-        serviceWorkerPath: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
+        path: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
       });
     });
   };
@@ -52,6 +52,9 @@ window.addEventListener("load", () => {
       OneSignalDeferred.push(async function (OneSignal) {
         await OneSignal.login(emailTrim); // initiate login first
 
+        console.log("OneSignal.User.externalId", OneSignal.User.externalId);
+        console.log("OneSignal.User.onesignalId", OneSignal.User.onesignalId);
+
         await OneSignal.User.addEmail(emailTrim);
         console.log("Registered Email", emailTrim);
 
@@ -89,8 +92,8 @@ window.addEventListener("load", () => {
         OneSignalDeferred.push(async function (OneSignal) {
           // login with email as external_id
           await OneSignal.login(emailTrim);
-          await OneSignal.User.addEmail(emailTrim);
-          console.log("Logged In User Account", emailTrim);
+          console.log("OneSignal.User.externalId", OneSignal.User.externalId);
+          console.log("OneSignal.User.onesignalId", OneSignal.User.onesignalId);
 
           // send outcome User Logged in
           await OneSignal.Session.sendOutcome("user_logged_in");
@@ -103,6 +106,13 @@ window.addEventListener("load", () => {
           document.querySelector("#loginBtn").classList.add("d-none");
           document.querySelector("#registerBtn").classList.add("d-none");
           document.querySelector("#logoutBtn").classList.remove("d-none");
+
+          const tags = OneSignal.User.getTags();
+          console.log("OneSignal.User tags", tags);
+
+          OneSignal.User.addEventListener("change", function (event) {
+            console.log("User change", { event });
+          });
         });
       } else {
         alert("Please enter email to login");
