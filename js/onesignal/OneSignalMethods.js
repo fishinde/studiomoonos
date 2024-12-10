@@ -12,7 +12,7 @@
         allowLocalhostAsSecureOrigin: true,
         appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
         serviceWorkerParam: { scope: "/studiomoonos/" },
-        serviceWorkerPath: "js/onesignal/OneSignalSDKWorker.js",
+        serviceWorkerPath: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
       });
     });
   };
