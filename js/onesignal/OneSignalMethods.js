@@ -13,6 +13,12 @@
         appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
         serviceWorkerParam: { scope: "/studiomoonos/" },
         path: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
+        notifyButton: {
+          enable: true,
+          size: 'small',
+          theme: 'default'
+          position: 'bottom-right'
+        },
       });
     });
   };
