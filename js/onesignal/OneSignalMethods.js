@@ -185,14 +185,17 @@ window.addEventListener("load", () => {
   }
 
   // Download Btn Send Outcome
-  const downloadBtn = document.getElementById("downloadBtn");
-  if (downloadBtn) {
-    downloadBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
+  const downloadBtns = document.getElementsByClassName("downloadBtn");
+  if (downloadBtns) {
+    downloadBtns.forEach((downloadBtn) => {
+      downloadBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
 
-      // send outcome to count how many user click download
-      OneSignalDeferred.push(async function (OneSignal) {
-        await OneSignal.Session.sendOutcome("user_download");
+        // send outcome to count how many user click download
+        OneSignalDeferred.push(async function (OneSignal) {
+          await OneSignal.Session.sendOutcome("user_download");
+          console.log("download button clicked");
+        });
       });
     });
   } else {
