@@ -70,17 +70,17 @@ window.addEventListener("load", () => {
   // Login
   const loginSubmitBtn = document.getElementById("loginSubmitBtn");
   if (loginSubmitBtn) {
-    loginSubmitBtn.addEventListener("click", (e) => {
+    loginSubmitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let email = document.getElementById("loginEmail").value;
 
       if (email) {
-        OneSignal.login(email); // login with email as external_id
-        console.log(OneSignal.User.externalId, "Logged In User EXTERNAL_ID");
+        const loginAccount = await OneSignal.login(email); // login with email as external_id
+        console.log(loginAccount, "Logged In User Account");
       }
 
       // send outcome User Logged in
-      OneSignal.Session.sendOutcome("user_logged_in");
+      await OneSignal.Session.sendOutcome("user_logged_in");
 
       const form = document.getElementById("loginForm");
       form.reset();
@@ -161,5 +161,20 @@ window.addEventListener("load", () => {
     });
   } else {
     console.warn("Add Name Aliases Submit button not found.");
+  }
+
+  // Download Btn Send Outcome
+  const downloadBtn = document.getElementById(
+    "downloadBtn"
+  );
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // send outcome to count how many user click download
+      OneSignal.Session.sendOutcome("user_download");
+    });
+  } else {
+    console.warn("Download button not found.");
   }
 });
