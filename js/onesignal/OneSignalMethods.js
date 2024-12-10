@@ -190,7 +190,7 @@ window.addEventListener("load", () => {
   // Download Btn Send Outcome
   const downloadBtns = document.getElementsByClassName("downloadBtn");
   if (downloadBtns) {
-    downloadBtns.forEach((downloadBtn) => {
+    Array.prototype.forEach.call(downloadBtns, (downloadBtn) => {
       downloadBtn.addEventListener("click", async (e) => {
         e.preventDefault();
 
