@@ -119,10 +119,7 @@ window.addEventListener("load", () => {
       let tagValue = document.getElementById("tagValue").value;
 
       if (tagKey || tagValue) {
-        OneSignal.User.addTag(
-          document.getElementById("tagKey").value,
-          document.getElementById("tagValue").value
-        );
+        OneSignal.User.addTag(tagKey, tagValue);
         console.log(tagKey, "Tag Key");
         console.log(tagValue, "Tag Value");
       }
@@ -135,5 +132,34 @@ window.addEventListener("load", () => {
     });
   } else {
     console.warn("Add Tag Submit button not found.");
+  }
+
+  // Add FirstName and LastName for more current user Aliases
+  const addFirstAndLastNameBtn = document.getElementById(
+    "addFirstAndLastNameBtn"
+  );
+  if (addFirstAndLastNameBtn) {
+    addFirstAndLastNameBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      let firstName = document.getElementById("firstName").value;
+      let lastName = document.getElementById("lastName").value;
+
+      if (firstName || lastName) {
+        OneSignal.User.addAliases({
+          firstName: firstName,
+          lastName: lastName,
+        });
+        console.log(firstName, "First Name");
+        console.log(lastName, "Last Name");
+      }
+
+      // send outcome User Added FirstName/LastName Aliases
+      OneSignal.Session.sendOutcome("user_added_aliases");
+
+      const form = document.getElementById("nameForm");
+      form.reset();
+    });
+  } else {
+    console.warn("Add Name Aliases Submit button not found.");
   }
 });
