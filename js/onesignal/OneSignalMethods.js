@@ -26,12 +26,14 @@ window.addEventListener("load", () => {
   if (!window.OneSignal) {
     console.error("OneSignal SDK not loaded!");
     return;
+  } else {
+    window.OneSignal.Debug.setLogLevel("trace");
   }
 
   // Register
-  const registerSubmitBtn = document.getElementById("registerSubmitBtn");
-  if (registerSubmitBtn) {
-    registerSubmitBtn.addEventListener("click", async (e) => {
+  const registerForm = document.getElementById("registerForm");
+  if (registerForm) {
+    registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       let name = document.getElementById("registerName").value;
       let email = document.getElementById("registerEmail").value;
@@ -62,6 +64,8 @@ window.addEventListener("load", () => {
         // send outcome User registered
         await OneSignal.Session.sendOutcome("user_registered");
 
+        console.log("OneSignal.User.onesignalId", OneSignal.User.onesignalId);
+
         const form = document.getElementById("registerForm");
         form.reset();
         const registerModal = document.getElementById("registerModal");
@@ -77,9 +81,9 @@ window.addEventListener("load", () => {
   }
 
   // Login
-  const loginSubmitBtn = document.getElementById("loginSubmitBtn");
-  if (loginSubmitBtn) {
-    loginSubmitBtn.addEventListener("click", async (e) => {
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       let email = document.getElementById("loginEmail").value;
       const emailTrim = email.trim();
@@ -92,6 +96,9 @@ window.addEventListener("load", () => {
 
           // send outcome User Logged in
           await OneSignal.Session.sendOutcome("user_logged_in");
+
+          console.log("OneSignal.User.onesignalId", OneSignal.User.onesignalId);
+
           const form = document.getElementById("loginForm");
           form.reset();
           const loginModal = document.getElementById("loginModal");
