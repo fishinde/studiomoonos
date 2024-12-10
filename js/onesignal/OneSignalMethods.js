@@ -15,9 +15,9 @@
         path: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
         notifyButton: {
           enable: true,
-          size: 'small',
-          theme: 'default'
-          position: 'bottom-right'
+          size: "small",
+          theme: "default",
+          position: "bottom-right",
         },
       });
     });
