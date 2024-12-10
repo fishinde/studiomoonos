@@ -31,7 +31,7 @@ window.addEventListener("load", () => {
   // Register
   const registerSubmitBtn = document.getElementById("registerSubmitBtn");
   if (registerSubmitBtn) {
-    registerSubmitBtn.addEventListener("click", (e) => {
+    registerSubmitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let name = document.getElementById("registerName").value;
       let email = document.getElementById("registerEmail").value;
@@ -107,7 +107,7 @@ window.addEventListener("load", () => {
   // Logout
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
-    logoutBtn.addEventListener("click", (e) => {
+    logoutBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       OneSignalDeferred.push(async function (OneSignal) {
         await OneSignal.logout();
@@ -125,7 +125,7 @@ window.addEventListener("load", () => {
     "addTagWithFieldsButton"
   );
   if (addTagWithFieldsButton) {
-    addTagWithFieldsButton.addEventListener("click", (e) => {
+    addTagWithFieldsButton.addEventListener("click", async (e) => {
       e.preventDefault();
       let tagKey = document.getElementById("tagKey").value;
       let tagValue = document.getElementById("tagValue").value;
@@ -153,7 +153,7 @@ window.addEventListener("load", () => {
     "addFirstAndLastNameBtn"
   );
   if (addFirstAndLastNameBtn) {
-    addFirstAndLastNameBtn.addEventListener("click", (e) => {
+    addFirstAndLastNameBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let firstName = document.getElementById("firstName").value;
       let lastName = document.getElementById("lastName").value;
@@ -184,7 +184,7 @@ window.addEventListener("load", () => {
   // Download Btn Send Outcome
   const downloadBtn = document.getElementById("downloadBtn");
   if (downloadBtn) {
-    downloadBtn.addEventListener("click", (e) => {
+    downloadBtn.addEventListener("click", async (e) => {
       e.preventDefault();
 
       // send outcome to count how many user click download
