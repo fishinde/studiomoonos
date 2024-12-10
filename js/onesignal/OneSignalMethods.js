@@ -11,8 +11,8 @@
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
         allowLocalhostAsSecureOrigin: true,
         appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
-        serviceWorkerParam: { scope: "/js/" },
-        serviceWorkerPath: "OneSignalSDKWorker.js",
+        serviceWorkerParam: { scope: "/studiomoonos/" },
+        serviceWorkerPath: "js/onesignal/OneSignalSDKWorker.js",
       });
     });
   };
@@ -38,30 +38,36 @@ window.addEventListener("load", () => {
       let phone = document.getElementById("registerPhone").value;
       let category = document.getElementById("registerCategory").value;
 
-      if (email) {
-        OneSignal.login(email); // set email as external_id
-        OneSignal.User.addEmail(email);
-        console.log(email, "Registered Email");
+      const emailTrim = email.trim();
+      const nameTrim = name.trim();
+      const phoneTrim = phone.trim();
+
+      if (!emailTrim || !nameTrim || !phoneTrim) {
+        alert("Please enter required fields");
+        return;
       }
 
-      if (name) {
-        OneSignal.User.addAlias("name", name);
-        console.log(name, "Registered Name");
-      }
+      OneSignalDeferred.push(async function (OneSignal) {
+        OneSignal.login(emailTrim); // initiate login first
 
-      if (phone) {
-        OneSignal.User.addSms(`+${phone}`);
-        console.log(phone, "Registered Phone");
-      }
+        OneSignal.User.addEmail(emailTrim);
+        console.log("Registered Email", emailTrim);
 
-      // send outcome User registered
-      OneSignal.Session.sendOutcome("user_registered");
+        OneSignal.User.addAlias("name", nameTrim);
+        console.log("Registered Name", nameTrim);
 
-      const form = document.getElementById("registerForm");
-      form.reset();
-      const registerModal = document.getElementById("registerModal");
-      const modal = bootstrap.Modal.getInstance(registerModal);
-      modal.hide();
+        OneSignal.User.addSms(`+${phoneTrim}`);
+        console.log("Registered Phone", phoneTrim);
+
+        // send outcome User registered
+        OneSignal.Session.sendOutcome("user_registered");
+
+        const form = document.getElementById("registerForm");
+        form.reset();
+        const registerModal = document.getElementById("registerModal");
+        const modal = bootstrap.Modal.getInstance(registerModal);
+        modal.hide();
+      });
     });
   } else {
     console.warn("Register button not found.");
@@ -73,22 +79,26 @@ window.addEventListener("load", () => {
     loginSubmitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let email = document.getElementById("loginEmail").value;
-
       if (email) {
-        const loginAccount = await OneSignal.login(email); // login with email as external_id
-        console.log(loginAccount, "Logged In User Account");
+        const loginEmail = email.trim();
+        OneSignalDeferred.push(async function (OneSignal) {
+          // login with email as external_id
+          await OneSignal.login(loginEmail);
+          console.log("Logged In User Account", loginEmail);
+
+          // send outcome User Logged in
+          await OneSignal.Session.sendOutcome("user_logged_in");
+          const form = document.getElementById("loginForm");
+          form.reset();
+          const loginModal = document.getElementById("loginModal");
+          const modal = bootstrap.Modal.getInstance(loginModal);
+          modal.hide();
+          document.querySelector("#loginBtn").classList.add("d-none");
+          document.querySelector("#logoutBtn").classList.remove("d-none");
+        });
+      } else {
+        alert("Please enter email to login");
       }
-
-      // send outcome User Logged in
-      await OneSignal.Session.sendOutcome("user_logged_in");
-
-      const form = document.getElementById("loginForm");
-      form.reset();
-      const registerModal = document.getElementById("loginModal");
-      const modal = bootstrap.Modal.getInstance(registerModal);
-      modal.hide();
-      document.querySelector("#loginBtn").classList.add("d-none");
-      document.querySelector("#logoutBtn").classList.remove("d-none");
     });
   } else {
     console.warn("Login button not found.");
@@ -99,10 +109,12 @@ window.addEventListener("load", () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      OneSignal.logout();
-      console.log("User signed out.");
-      document.querySelector("#logoutBtn").classList.add("d-none");
-      document.querySelector("#loginBtn").classList.remove("d-none");
+      OneSignalDeferred.push(async function (OneSignal) {
+        await OneSignal.logout();
+        console.log("User signed out.");
+        document.querySelector("#logoutBtn").classList.add("d-none");
+        document.querySelector("#loginBtn").classList.remove("d-none");
+      });
     });
   } else {
     console.warn("Logout button not found.");
@@ -118,17 +130,19 @@ window.addEventListener("load", () => {
       let tagKey = document.getElementById("tagKey").value;
       let tagValue = document.getElementById("tagValue").value;
 
-      if (tagKey || tagValue) {
-        OneSignal.User.addTag(tagKey, tagValue);
-        console.log(tagKey, "Tag Key");
-        console.log(tagValue, "Tag Value");
+      if (tagKey && tagValue) {
+        OneSignalDeferred.push(async function (OneSignal) {
+          OneSignal.User.addTag(tagKey, tagValue);
+          console.log("Tag Key", tagKey);
+          console.log("Tag Value", tagValue);
+          // send outcome User Added Tag
+          OneSignal.Session.sendOutcome("user_added_tag");
+          const form = document.getElementById("tagForm");
+          form.reset();
+        });
+      } else {
+        alert("Please enter both tag key and value");
       }
-
-      // send outcome User Added Tag
-      OneSignal.Session.sendOutcome("user_added_tag");
-
-      const form = document.getElementById("tagForm");
-      form.reset();
     });
   } else {
     console.warn("Add Tag Submit button not found.");
@@ -144,35 +158,39 @@ window.addEventListener("load", () => {
       let firstName = document.getElementById("firstName").value;
       let lastName = document.getElementById("lastName").value;
 
-      if (firstName || lastName) {
-        OneSignal.User.addAliases({
-          firstName: firstName,
-          lastName: lastName,
+      if (firstName && lastName) {
+        OneSignalDeferred.push(async function (OneSignal) {
+          OneSignal.User.addAliases({
+            firstName: firstName,
+            lastName: lastName,
+          });
+          console.log(firstName, "First Name");
+          console.log(lastName, "Last Name");
+
+          // send outcome User Added FirstName/LastName Aliases
+          OneSignal.Session.sendOutcome("user_added_aliases");
+
+          const form = document.getElementById("nameForm");
+          form.reset();
         });
-        console.log(firstName, "First Name");
-        console.log(lastName, "Last Name");
+      } else {
+        alert("Please enter both firstname and lastname");
       }
-
-      // send outcome User Added FirstName/LastName Aliases
-      OneSignal.Session.sendOutcome("user_added_aliases");
-
-      const form = document.getElementById("nameForm");
-      form.reset();
     });
   } else {
     console.warn("Add Name Aliases Submit button not found.");
   }
 
   // Download Btn Send Outcome
-  const downloadBtn = document.getElementById(
-    "downloadBtn"
-  );
+  const downloadBtn = document.getElementById("downloadBtn");
   if (downloadBtn) {
     downloadBtn.addEventListener("click", (e) => {
       e.preventDefault();
 
       // send outcome to count how many user click download
-      OneSignal.Session.sendOutcome("user_download");
+      OneSignalDeferred.push(async function (OneSignal) {
+        OneSignal.Session.sendOutcome("user_download");
+      });
     });
   } else {
     console.warn("Download button not found.");
