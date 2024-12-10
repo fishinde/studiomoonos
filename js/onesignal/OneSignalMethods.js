@@ -31,7 +31,7 @@ window.addEventListener("load", () => {
   // Register
   const registerSubmitBtn = document.getElementById("registerSubmitBtn");
   if (registerSubmitBtn) {
-    registerSubmitBtn.addEventListener("click", (e) => {
+    registerSubmitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let name = document.getElementById("registerName").value;
       let email = document.getElementById("registerEmail").value;
@@ -39,23 +39,25 @@ window.addEventListener("load", () => {
       let category = document.getElementById("registerCategory").value;
 
       if (email) {
-        OneSignal.login(email); // set email as external_id
-        OneSignal.User.addEmail(email);
-        console.log(email, "Registered Email");
+        const login = await OneSignal.login(email); // set email as external_id
+        console.log(login, "User Login")
+        const addEmail = await OneSignal.User.addEmail(email);
+        console.log(addEmail, "Registered Email");
       }
 
       if (name) {
-        OneSignal.User.addAlias("name", name);
-        console.log(name, "Registered Name");
+        const nameAlias = await OneSignal.User.addAlias("name", name);
+        console.log(nameAlias, "Registered Name");
       }
 
       if (phone) {
-        OneSignal.User.addSms(`+${phone}`);
-        console.log(phone, "Registered Phone");
+        const addPhone = await OneSignal.User.addSms(`+${phone}`);
+        console.log(addPhone, "Registered Phone");
       }
 
       // send outcome User registered
-      OneSignal.Session.sendOutcome("user_registered");
+      const registerOutcome = await OneSignal.Session.sendOutcome("user_registered");
+      console.log(registerOutcome, "Register Outcome")
 
       const form = document.getElementById("registerForm");
       form.reset();
@@ -80,7 +82,8 @@ window.addEventListener("load", () => {
       }
 
       // send outcome User Logged in
-      await OneSignal.Session.sendOutcome("user_logged_in");
+      const loginOutcome = await OneSignal.Session.sendOutcome("user_logged_in");
+      console.log(loginOutcome, "Login Outcome")
 
       const form = document.getElementById("loginForm");
       form.reset();
@@ -97,10 +100,10 @@ window.addEventListener("load", () => {
   // Logout
   const logoutBtn = document.getElementById("logoutBtn");
   if (logoutBtn) {
-    logoutBtn.addEventListener("click", (e) => {
+    logoutBtn.addEventListener("click", async (e) => {
       e.preventDefault();
-      OneSignal.logout();
-      console.log("User signed out.");
+      const logout = await OneSignal.logout();
+      console.log(logout, "User signed out.");
       document.querySelector("#logoutBtn").classList.add("d-none");
       document.querySelector("#loginBtn").classList.remove("d-none");
     });
@@ -113,19 +116,19 @@ window.addEventListener("load", () => {
     "addTagWithFieldsButton"
   );
   if (addTagWithFieldsButton) {
-    addTagWithFieldsButton.addEventListener("click", (e) => {
+    addTagWithFieldsButton.addEventListener("click", async (e) => {
       e.preventDefault();
       let tagKey = document.getElementById("tagKey").value;
       let tagValue = document.getElementById("tagValue").value;
 
       if (tagKey || tagValue) {
-        OneSignal.User.addTag(tagKey, tagValue);
-        console.log(tagKey, "Tag Key");
-        console.log(tagValue, "Tag Value");
+        const addTag = await OneSignal.User.addTag(tagKey, tagValue);
+        console.log(addTag, "Added Tag");
       }
 
       // send outcome User Added Tag
-      OneSignal.Session.sendOutcome("user_added_tag");
+      const tagOutcome = await OneSignal.Session.sendOutcome("user_added_tag");
+      console.log(tagOutcome, "Tag Outcome")
 
       const form = document.getElementById("tagForm");
       form.reset();
@@ -139,22 +142,22 @@ window.addEventListener("load", () => {
     "addFirstAndLastNameBtn"
   );
   if (addFirstAndLastNameBtn) {
-    addFirstAndLastNameBtn.addEventListener("click", (e) => {
+    addFirstAndLastNameBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       let firstName = document.getElementById("firstName").value;
       let lastName = document.getElementById("lastName").value;
 
       if (firstName || lastName) {
-        OneSignal.User.addAliases({
+        const addAliases = await OneSignal.User.addAliases({
           firstName: firstName,
           lastName: lastName,
         });
-        console.log(firstName, "First Name");
-        console.log(lastName, "Last Name");
+        console.log(addAliases, "Added Aliases");
       }
 
       // send outcome User Added FirstName/LastName Aliases
-      OneSignal.Session.sendOutcome("user_added_aliases");
+      const nameAliasesOutcome = await OneSignal.Session.sendOutcome("user_added_aliases");
+      console.log(nameAliasesOutcome, "Name Aliases Outcome")
 
       const form = document.getElementById("nameForm");
       form.reset();
@@ -168,11 +171,12 @@ window.addEventListener("load", () => {
     "downloadBtn"
   );
   if (downloadBtn) {
-    downloadBtn.addEventListener("click", (e) => {
+    downloadBtn.addEventListener("click", async (e) => {
       e.preventDefault();
 
       // send outcome to count how many user click download
-      OneSignal.Session.sendOutcome("user_download");
+      const downloadOutcome = await OneSignal.Session.sendOutcome("user_download");
+      console.log(downloadOutcome, "Download Outcome")
     });
   } else {
     console.warn("Download button not found.");
