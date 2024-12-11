@@ -12,8 +12,7 @@
         allowLocalhostAsSecureOrigin: true,
         appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
         serviceWorkerParam: { scope: "/studiomoonos/" },
-        serviceWorkerPath: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
-        path: "/studiomoonos/js/onesignal/OneSignalSDKWorker.js",
+        path: "OneSignalSDKWorker.js", // this always set to OneSignalSDKWorker.js by server config
         notifyButton: {
           enable: true,
           size: "small",
