@@ -198,7 +198,8 @@ window.addEventListener("load", () => {
       if (firstName && lastName) {
         OneSignalDeferred.push(async function (OneSignal) {
           console.log("OneSignal.User.externalId", OneSignal.User.externalId);
-          await promptPushCategories();
+          await OneSignal.Slidedown.promptPushCategories();
+
 
 
           //OneSignal.User.addAliases({
