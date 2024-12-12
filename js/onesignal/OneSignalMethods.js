@@ -48,9 +48,10 @@ window.addEventListener("load", () => {
 
       const emailTrim = email.trim();
       const nameTrim = name.trim();
-      // const phoneTrim = phone.trim();
+      const phoneTrim = phone.trim();
+      const categoryTrim = category.trim();
 
-      if (!emailTrim || !nameTrim) {
+      if (!emailTrim) {
         alert("Please enter required fields");
         return;
       }
@@ -64,11 +65,20 @@ window.addEventListener("load", () => {
         await OneSignal.User.addEmail(emailTrim);
         console.log("Registered Email", emailTrim);
 
-        await OneSignal.User.addAlias("name", nameTrim);
-        console.log("Registered Name", nameTrim);
+        if (nameTrim) {
+          await OneSignal.User.addAlias("name", nameTrim);
+          console.log("Registered Name", nameTrim);
+        }
 
-        // await OneSignal.User.addSms(`+${phoneTrim}`);
-        // console.log("Registered Phone", phoneTrim);
+        if (phoneTrim) {
+          await OneSignal.User.addSms(`+${phoneTrim}`);
+          console.log("Registered Phone", phoneTrim);
+        }
+
+        if (categoryTrim) {
+          await OneSignal.User.addTag("category", categoryTrim);
+          console.log("Add Tag, key: category, value:", categoryTrim);
+        }
 
         // send outcome User registered
         await OneSignal.Session.sendOutcome("user_registered");
@@ -192,8 +202,8 @@ window.addEventListener("load", () => {
             firstName: firstName,
             lastName: lastName,
           });
-          console.log(firstName, "First Name");
-          console.log(lastName, "Last Name");
+          console.log("First Name", firstName);
+          console.log("Last Name", lastName);
 
           // send outcome User Added FirstName/LastName Aliases
           await OneSignal.Session.sendOutcome("user_added_aliases");
