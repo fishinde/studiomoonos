@@ -198,10 +198,13 @@ window.addEventListener("load", () => {
       if (firstName && lastName) {
         OneSignalDeferred.push(async function (OneSignal) {
           console.log("OneSignal.User.externalId", OneSignal.User.externalId);
-          await OneSignal.User.addAliases({
-            firstName: firstName,
-            lastName: lastName,
-          });
+          await promptPushCategories();
+
+
+          //OneSignal.User.addAliases({
+          //  firstName: firstName,
+          //  lastName: lastName,
+          //});
           console.log("First Name", firstName);
           console.log("Last Name", lastName);
 
