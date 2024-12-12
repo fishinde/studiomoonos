@@ -216,7 +216,7 @@ window.addEventListener("load", () => {
           form.reset();
         });
       } else {
-        alert("Please enter both firstname and lastname");
+      //  alert("Please enter both firstname and lastname");
       }
     });
   } else {
