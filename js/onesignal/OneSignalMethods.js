@@ -10,8 +10,8 @@
       await OneSignal.init({
         
         allowLocalhostAsSecureOrigin: true,
-        appId: "3c3d6636-8648-4994-8c79-92da1cc22fa0", //main
-        serviceWorkerParam: { scope: "/studiomoonos fishtank/" },
+        appId: "b58dc388-966a-4b2e-a4b1-ed21611ca8e8", //main
+        serviceWorkerParam: { scope: "/studiomoonos/" },
         path: "OneSignalSDKWorker.js", // this always set to OneSignalSDKWorker.js by server config
         notifyButton: {
           enable: true,
